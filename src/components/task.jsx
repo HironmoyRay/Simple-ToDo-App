@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function Task({ task, onChangeTask }) {
+export default function Task({ task, onChangeTask, onDeleteTask }) {
   //   const { id, name, done } = task;
   const [isEditing, setIsEditing] = useState(false);
   const textArea = isEditing ? (
@@ -36,7 +36,7 @@ export default function Task({ task, onChangeTask }) {
         }
       />
       {textArea}
-      <button>Delete</button>
+      <button onClick={() => onDeleteTask(task.id)}>Delete</button>
     </>
   );
 }

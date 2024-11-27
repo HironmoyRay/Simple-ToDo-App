@@ -4,6 +4,7 @@ import Task from "./task";
 
 export default function TaskList() {
   const [tasks, setTasks] = useState(initialTasks);
+
   const handleChangeTask = (editTask) => {
     let newTasks = tasks.map((task) => {
       if (task.id === editTask.id) {
@@ -18,12 +19,21 @@ export default function TaskList() {
     });
     setTasks(newTasks);
   };
+
+  const handleDeleteTask = (taskId) => {
+    setTasks(tasks.filter((task) => task.id != taskId));
+  };
+
   return (
     <>
       <ul>
         {tasks.map((task) => (
           <li key={task.id}>
-            <Task task={task} onChangeTask={handleChangeTask} />
+            <Task
+              task={task}
+              onChangeTask={handleChangeTask}
+              onDeleteTask={handleDeleteTask}
+            />
           </li>
         ))}
       </ul>
