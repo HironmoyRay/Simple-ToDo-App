@@ -5,7 +5,7 @@ export default function AddToTask({ onAddTask }) {
     <>
       <input
         type="text"
-        placeholder="Add your Task"
+        placeholder="Write the Name of your Task"
         value={text}
         onChange={(e) => {
           setText(e.target.value);
