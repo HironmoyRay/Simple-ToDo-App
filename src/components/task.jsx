@@ -1,22 +1,40 @@
 import { useState } from "react";
 
-export default function Task({ task }) {
-  const { id, name, done } = task;
+export default function Task({ task, onChangeTask }) {
+  //   const { id, name, done } = task;
   const [isEditing, setIsEditing] = useState(false);
   const textArea = isEditing ? (
     <>
-      {name}
-      <button onClick={() => setIsEditing(false)}>Edit</button>
+      <input
+        type="text"
+        value={task.name}
+        onChange={(e) =>
+          onChangeTask({
+            ...task,
+            name: e.target.value,
+          })
+        }
+      />
+      <button onClick={() => setIsEditing(false)}>Save</button>
     </>
   ) : (
     <>
-      <input type="text" />
-      <button onClick={() => setIsEditing(true)}>Save</button>
+      {task.name}
+      <button onClick={() => setIsEditing(true)}>Edit</button>
     </>
   );
   return (
     <>
-      <input type="checkbox" checked={done} />
+      <input
+        type="checkbox"
+        checked={task.done}
+        onChange={(e) =>
+          onChangeTask({
+            ...task,
+            done: e.target.checked,
+          })
+        }
+      />
       {textArea}
       <button>Delete</button>
     </>
