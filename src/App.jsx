@@ -3,6 +3,8 @@ import AddToTask from "./components/addToTask";
 import TaskList from "./components/taskList";
 import { initialTasks } from "./data/initialTasks";
 
+let nextId = 4;
+
 function App() {
   const [tasks, setTasks] = useState(initialTasks);
 
@@ -25,11 +27,15 @@ function App() {
     setTasks(tasks.filter((task) => task.id != taskId));
   };
 
+  const handleAddTask = (text) => {
+    setTasks([...tasks, { name: text, done: false, id: nextId++ }]);
+  };
+
   return (
     <>
       <div>
         <h1>Simple To Do App</h1>
-        <AddToTask />
+        <AddToTask onAddTask={handleAddTask} />
         <TaskList
           tasks={tasks}
           onChangeTask={handleChangeTask}

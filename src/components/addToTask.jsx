@@ -1,6 +1,6 @@
 import { useState } from "react";
-export default function AddToTask() {
-  const [text, setText] = useState(" ");
+export default function AddToTask({ onAddTask }) {
+  const [text, setText] = useState("");
   return (
     <>
       <input
@@ -8,11 +8,17 @@ export default function AddToTask() {
         placeholder="Add your Task"
         value={text}
         onChange={(e) => {
-        //   console.log(e.target.value);
           setText(e.target.value);
         }}
       />
-      <button>Add Task</button>
+      <button
+        onClick={() => {
+          onAddTask(text);
+          setText("");
+        }}
+      >
+        Add Task
+      </button>
     </>
   );
 }
